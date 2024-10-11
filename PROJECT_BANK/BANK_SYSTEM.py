@@ -31,8 +31,6 @@ while user == 1:
     if(choose == 1):
         print("================ WITHDRAW ================")
         withdraw_limit += 1;
-        #print(f"The withdraw was u${value_withdraw}");
-        #print(f"The balance currently is U${balance_account}");
         if(withdraw_limit > 3):
             print("DIARY QUANTITY OF WITHDRAW EXCEEDED!")
         else:
@@ -41,8 +39,7 @@ while user == 1:
     elif(choose == 2):
         print("================ DEPOSIT ================")
         value_deposit = float(input("VALUE DEPOSIT: "));
-        deposit(value_deposit)
-        #print(f"The deposit was {value_deposit}");
+        deposit(value_deposit);
         print(f"The balance now is U${value_deposit}");
     else:
         print("================ EXTRACT ================")
