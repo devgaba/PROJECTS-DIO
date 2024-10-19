@@ -2,26 +2,26 @@ import textwrap
 
 
 # Operações referentes à conta bancária: sacar, depositar, exibir_extrato              ---------->>>> 1° Parte
-def sacar(*, saldo, valor, extrato, limite, numero_saques, limite_saques):
-    excedeu_saldo = valor > saldo
-    excedeu_limite = valor > limite
-    excedeu_saques = numero_saques > limite_saques
+def withdraw(*, balance, value, extract, average, qt_withdraw, limit_withdraw):
+    exceded_balace = value > balance
+    exceded_average = value > average
+    exceded_withdraw = qt_withdraw > limit_withdraw
 
-    if excedeu_saldo:
-        print("\n@@@ Operação falhou! Saldo insuficiente. @@@")
-    elif excedeu_limite:
-        print("\n@@@ Operação falhou! Limite de saque excedido. @@@")
-    elif excedeu_saques:
-        print("\n@@@ Operação falhou! Limite diário de saques excedido. @@@")
-    elif valor > 0:
-        saldo -= valor
-        extrato += f"Saque:\tR$ {valor:.2f}\n"
-        numero_saques += 1
-        print("\t\tSaque realizado com sucesso!")
+    if exceded_balace:
+        print("\n@@@ Failed Operation! Balance empty. @@@")
+    elif exceded_average:
+        print("\n@@@ Failed Operation! Withdraw limit excedeed. @@@")
+    elif exceded_withdraw:
+        print("\n@@@ Failed Operation! Diary limit of withdraw excedeed. @@@")
+    elif value > 0:
+        balance -= value
+        extract += f"Withdraw:\tR$ {value:.2f}\n"
+        qt_withdraw += 1
+        print("\t\tWithdraw sucessfull!")
     else:
-        print("\n@@@ Operação falhou! O valor informando é inválido. @@@")
+        print("\n@@@ Failed Operation! O valor informando é inválido. @@@")
 
-    return saldo, extrato
+    return balance, extract
 
 
 def depositar(saldo, valor, extrato, /):
@@ -107,15 +107,15 @@ def menu():
 
 
 def main():
-    LIMITE_SAQUES = 3
-    AGENCIA = "0001"
+    LIMIT_WITHDRAW = 3
+    AGENCY = "0001"
 
-    saldo = 0
-    extrato = ""
-    limite = 500
-    numero_saques = 0
-    usuarios = []
-    contas = []
+    balance = 0
+    extract = ""
+    average = 500
+    qt_withdraw = 0
+    users = []
+    accounts = []
 
 
     while True:
@@ -126,13 +126,13 @@ def main():
             saldo, extrato = depositar(saldo, valor, extrato)
         elif opcao == "s":
             valor = float(input("\tValor do saque: "))
-            saldo, extrato = sacar(
+            saldo, extrato = withdraw(
                 saldo=saldo,
                 valor=valor,
                 extrato=extrato,
-                limite=limite,
-                numero_saques=numero_saques,
-                limite_saques=LIMITE_SAQUES,
+                average=average,
+                qt_withdraw=qt_withdraw,
+                limit_withdraw=LIMIT_WITHDRAW,
             )
         elif opcao == "e":
             exibir_extrato(saldo, extrato=extrato)
