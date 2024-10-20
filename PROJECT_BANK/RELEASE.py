@@ -40,6 +40,33 @@ def history_account(balance, /,*, history):
 
     print(f"Current Balance R${balance:.2f}\n" + ("="*46))
 
+#Função para criar usuários
+def create_user(users):
+    cpf = input("CPF(Just Numbers): ")
+    
+    if filter_users(cpf, users):
+        print("#Error --> User exists!")
+        return 
+    
+    name = input("FullName: ")
+    address =  input("Address(City/State, St: Number St - ZipCode): ")
+    birth_date = input("Birth of Date(yyyy-mm-dd): ")
+
+    users.append({"name":name,
+                "cpf":cpf,
+                "birth_date":birth_date,
+                "address":address})
+
+    print("Created sucessfully user!")
+
+#Função para filtar usuários
+def filter_users(cpf, users):
+    verified_users = [user for user in users if user["cpf"] == cpf]
+    if verified_users:
+        return verified_users[0]
+    else:
+        None
+
 #Função Principal do Programa
 def main():
     #Regras da conta
@@ -50,13 +77,15 @@ def main():
     balance = 0
     history = ""
     qt_withdraw = 0
-    
+    users = []
     while True:
         options = """\n
     ============== OPERATIONS ==============
     [d]\tDeposit
     [w]\tWithdraw
     [h]\tHistory Bank
+    [nu]\t New User
+    [q]\t Exit
     ==> """
         option = input(textwrap.dedent(options))
         
@@ -74,6 +103,10 @@ def main():
                 qt_limit_withdraw=QT_LIMIT_WITHDRAW)
         elif option == "h":
             history_account(balance, history=history)
+        elif option == "nu":
+            create_user(users)
+        elif option == "q":
+            break
         else:
             print("#Error --> Invalid Operation! ")
 
